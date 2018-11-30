@@ -45,9 +45,9 @@ void gainScore(User_score Us[],int N,int K,int M)
 	for(i=1;i<=M;i++){
 		int ui,pi,pso;
 		scanf("%d %d %d",&ui,&pi,&pso);
-		Us[(i-1)*K+pi].problem_id=pi;
-		if(Us[(i-1)*K+pi].score_obtained<pso)
-		Us[(i-1)*K+pi].score_obtained=pso;
+		Us[(ui-1)*K+pi].problem_id=pi;
+		if(Us[(ui-1)*K+pi].score_obtained<pso)
+		Us[(ui-1)*K+pi].score_obtained=pso;
 	}
 }
 void gainKey(User_score Us[],Key Uk[],int problem_score[],int N,int K)
@@ -62,7 +62,7 @@ void gainKey(User_score Us[],Key Uk[],int problem_score[],int N,int K)
 			if(Us[(i-1)*K+j].score_obtained!=-1){
 				notsign=1;
 				sum=sum+Us[(i-1)*K+j].score_obtained;
-				if(Us[(i-1)*K+j].score_obtained=problem_score[j])
+				if(Us[(i-1)*K+j].score_obtained==problem_score[j])
 					cnt++;
 			} 
 		}
@@ -89,6 +89,7 @@ void testGainScore(void)
 	User_score Us[N*K+1];
 	gainScore(Us,N,K,M);
 	print(Us,K,N);
+	printf("Us[10]=%d",Us[10].score_obtained);
 }
 void LSDRadixSort(int a[], int N )
 {
@@ -98,9 +99,9 @@ void print(User_score Us[],const int K,const int N)
 {
 	int i,j;
 	for(i=1;i<=N;i++){
-		for(j=0;j<K;j++){
+		for(j=1;j<=K;j++){
 			printf("User id: %d,Problem id: %d,Obtain score: %d\n",
-					i,j+1,Us[(i-1)*K+j].score_obtained);
+					i,j,Us[(i-1)*K+j].score_obtained);
 		}
 	}
 }
