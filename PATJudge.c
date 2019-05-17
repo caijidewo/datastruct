@@ -16,23 +16,14 @@ void gainScore(User_score Us[],int N,int K,int M);
 void gainKey(User_score Us[],Key Uk[],int problem_score[],int N,int K);
 void LSDRadixSort(int a[], int N );
 void testGainScore(void);
-void print(User_score Us[],int K,int N);
+void testGainKey(void);
+void print1(User_score Us[],int K,int N);
+void print2(Key Uk[],int N);
 int main(void)
 {
 	/*@Test*/
 	testGainScore();
-	/*
-	int N,K,M;
-	scanf("%d %d %d",&N,&K,&M);
-	int problem_score[K];
-	int i;
-	for(i=0;i<K;i++){
-		scanf("%d",&problem_score[i]);
-	}
-	
-	User_score Us[N*K+1];
-	Key Uk[N];
-	*/
+	testGainKey();
 	return 0;
 }
 void gainScore(User_score Us[],int N,int K,int M)
@@ -58,11 +49,15 @@ void gainKey(User_score Us[],Key Uk[],int problem_score[],int N,int K)
 		cnt=0;
 		sum=0;
 		notsign=-1;//not pass the compiler or no submission
-		for(j=0;j<K;j++){
+		for(j=1;j<=K;j++){
 			if(Us[(i-1)*K+j].score_obtained!=-1){
 				notsign=1;
 				sum=sum+Us[(i-1)*K+j].score_obtained;
+<<<<<<< HEAD
 				if(Us[(i-1)*K+j].score_obtained==problem_score[j])
+=======
+				if(Us[(i-1)*K+j].score_obtained==problem_score[j-1])
+>>>>>>> 750406ab880a74ec84bfc74a3d20ece1a37aec86
 					cnt++;
 			} 
 		}
@@ -88,14 +83,33 @@ void testGainScore(void)
 	}
 	User_score Us[N*K+1];
 	gainScore(Us,N,K,M);
+<<<<<<< HEAD
 	print(Us,K,N);
 	printf("Us[10]=%d",Us[10].score_obtained);
+=======
+	print1(Us,K,N);
+}
+void testGainKey(void)
+{
+	int N,K,M;
+	scanf("%d %d %d",&N,&K,&M);
+	int problem_score[K];
+	int i;
+	for(i=0;i<K;i++){
+		scanf("%d",&problem_score[i]);
+	}
+	User_score Us[N*K+1];
+	Key Uk[N+1];
+	gainScore(Us,N,K,M);
+	gainKey(Us,Uk,problem_score,N,K);
+	print2(Uk,N);
+>>>>>>> 750406ab880a74ec84bfc74a3d20ece1a37aec86
 }
 void LSDRadixSort(int a[], int N )
 {
 	
 }
-void print(User_score Us[],const int K,const int N)
+void print1(User_score Us[],const int K,const int N)
 {
 	int i,j;
 	for(i=1;i<=N;i++){
@@ -103,5 +117,13 @@ void print(User_score Us[],const int K,const int N)
 			printf("User id: %d,Problem id: %d,Obtain score: %d\n",
 					i,j,Us[(i-1)*K+j].score_obtained);
 		}
+	}
+}
+void print2(Key Uk[],int N)
+{
+	int i;
+	for(i=1;i<=N;i++){
+		printf("User id: %d,Problem solve: %d,Total score: %d\n"
+				,Uk[i].user_id,Uk[i].problem_solve,Uk[i].total_score);
 	}
 }
